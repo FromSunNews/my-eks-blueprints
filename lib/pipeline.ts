@@ -16,7 +16,10 @@ export default class PipelineConstruct extends Construct {
       .account(account)
       .region(region)
       .version("auto")
-      .addOns(new blueprints.ClusterAutoScalerAddOn) // Cluster Autoscaler addon goes here
+      .addOns(
+        new blueprints.ClusterAutoScalerAddOn,
+        new blueprints.KubeviousAddOn(), // New addon goes here
+      ) // Cluster Autoscaler addon goes here
       .teams(new TeamPlatform(account), new TeamApplication('burnham', account));
 
     blueprints.CodePipelineStack.builder()
