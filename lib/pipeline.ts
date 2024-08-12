@@ -15,11 +15,7 @@ export default class PipelineConstruct extends Construct {
     const blueprint = blueprints.EksBlueprint.builder()
       .account(account)
       .region(region)
-      .clusterProvider(
-        new blueprints.GenericClusterProvider({
-          version: KubernetesVersion.V1_29,
-        })
-      )
+      .version("auto")
       .addOns(new blueprints.ClusterAutoScalerAddOn) // Cluster Autoscaler addon goes here
       .teams(new TeamPlatform(account), new TeamApplication('burnham', account));
 
